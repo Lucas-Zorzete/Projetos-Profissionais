@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editora Solielle</title>
+    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="stylesheet" href="../static/css/animations.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css">
+</head>
+<body>
+    <header id="site-header">
+        <img id="item-left" class="item" src="../static/img/header item left.png" alt="detalhe esquerda" width="52.5px">
+        <img id="item-right" class="item" src="../static/img/header item right.png" alt="detalhe direita" width="53px">
+        <div class="wrap container">
+            <img src="../static/img/logo dark.png" alt="logo tema escuro" width="100px" id="brand-light">
+            <img src="../static/img/logo light.png" alt="logo tema claro" width="100px" id="brand-night">
+
+            <nav class="menu-buttons">
+                <a href="#home">Início</a>
+                <a href="#catalog">Catálogo de Livros</a>
+                <a href="#authors">Autores</a>
+                <a href="#blog">Notícias & Blog</a>
+                <a href="#about">Sobre Nós</a>
+                <a href="#contact">Contato</a>
+            </nav>
+            <nav class="user-buttons">
+                <button data-quantity="0" class="btn-cart" title="Carrinho">
+                    <svg class="icon-cart" viewBox="0 0 24.38 30.52" height="30.52" width="24.38" xmlns="http://www.w3.org/2000/svg">
+                        <path transform="translate(-3.62 -0.85)" d="M28,27.3,26.24,7.51a.75.75,0,0,0-.76-.69h-3.7a6,6,0,0,0-12,0H6.13a.76.76,0,0,0-.76.69L3.62,27.3v.07a4.29,4.29,0,0,0,4.52,4H23.48a4.29,4.29,0,0,0,4.52-4ZM15.81,2.37a4.47,4.47,0,0,1,4.46,4.45H11.35a4.47,4.47,0,0,1,4.46-4.45Zm7.67,27.48H8.13a2.79,2.79,0,0,1-3-2.45L6.83,8.34h3V11a.76.76,0,0,0,1.52,0V8.34h8.92V11a.76.76,0,0,0,1.52,0V8.34h3L26.48,27.4a2.79,2.79,0,0,1-3,2.44Zm0,0"></path>
+                    </svg>
+                    <span class="quantity"></span>
+                </button>
+                <button id="user-btn" title="Cadastrar ou Entrar"><i class="ri-account-circle-fill"></i></button>
+            </nav>
+            <button class="btn-theme" id="light-btn" title="Mudar para tema escuro"><img src="../static/img/bear.png" alt="tema claro" width="59px"></button>
+            <button class="btn-theme" id="night-btn" title="Mudar para tema claro"><img src="../static/img/wolf.png" alt="tema escuro" width="55px"></button>
+        </div>
+    </header>   
+
+    <main id="home" class="container hero">
+        <div class="banner reveal">
+            <div>
+                <button class="bedge">Novidade</button>
+                <h1>Descubra histórias que <span style="color:var(--primary-color)">transformam</span>.</h1>
+                <p class="muted">Lançamentos, autores e notícias da <strong>Editoria Solielle</strong> em um só lugar. 
+                Explore o catálogo e encontre sua próxima leitura.</p>
+                <div style="display: flex; gap: .6rem; flex-wrap: wrap;">
+                    <a style="color: var(--bg-color)" class="btn" href="#blog">Ver notícias e blogs</a>
+                    <a style="color: var(--text)" href="https://l.instagram.com/?u=https%3A%2F%2Fwww.vakinha.com.br%2F5567514%3Ffbclid%3DPAZXh0bgNhZW0CMTEAAaca6bLOCoVwiu0_LKrP9aGx8W97yXn7J7IaJvcrLvR-XUWe6jwt8Fl6Gb9VoQ_aem_vBC4fxN33GlF5ts3b866pQ&e=AT2AXcZZZE_xbMW65Ko6m8VI7GcFBcD4zQeonL38P2CG-9jFWpP55KIifG1ya7vMApJAWgAC_aPkRiSkdzphBUiU1xMkKsIRQFpaDfDKAKiBPqTaJBn6MX9O0A" title="Vakinha Solielle" target="_blank" class="btn secondary">Contribua Conosco</a>
+                </div>
+                <div class="dots" aria-label="Ir para slide" id="dots"></div>
+            </div>  
+            <div class="slides" aria-live="polite">
+                <div class="slide active"><img src="../static/img/banner1.png" alt="img 1"></div>
+                <div class="slide"><img src="../static/img/banner2.png" alt="img 2"></div>
+                <div class="slide"><img src="../static/img/banner3.png" alt="img 3"></div>
+            </div>
+        </div>
+    </main>
+
+    <section id="catalog">
+        <div class="container">
+            <form class="searchbar" role="search" aria-label="Pesquisar no site" onsubmit="event.preventDefault()">
+                <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor">"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                <input type="search" id="search-input" placeholder="Pesquisar livros, autores, posts..." autocomplete="off" aria-controls="results">
+                <button class="clear" type="button" title="Limpar" aria-label="Limpar busca" id="clear-search">×</button>
+            </form>
+            <h2>Catálogo de Livros</h2>
+                <!-- <div style="display: flex; gap: .5rem; align-items: center;">
+                    <label for="genre" class="muted">Filtrar:</label>
+                    <select id="genre" aria-label="Filtrar por gênero">
+                        <option value="">Todos os gêneros</option>
+                        <option>Memórias</option>
+                        <option>Poesias</option>
+                    </select> -->
+        </div>
+        <div class="results" id="results" aria-live="polite" aria-label="Resultados de pesquisa">
+        <header class="container">
+            <strong>Resultados</strong>
+            <span id="results-count" class="badge" style="margin-left: .6rem;">0</span>
+            <div class="group container" id="results-books"></div>
+            <div class="group container" id="results-authors"></div>
+            <div class="group container" id="results-posts"></div>
+        </header>
+    </div>
+        <div id="books-grid" class="grid cards reveal"></div>
+    </section>
+
+    <section id="authors">
+        <div class="container">
+            <h2 class="section-title">Autores</h2>
+            <div id="authors-grid" class="grid authors reveal"></div>
+        </div>
+    </section>
+
+    <section id="blog">
+        <div class="container">
+            <h2 class="section-title">Notícias & Blog</h2>
+            <div id="posts-list" class="grid reveal"></div>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="container about reveal">
+            <div>
+                <div style="display:flex; gap:1.5rem; align-items: end;">
+                    <h2>Sobre nós</h2>
+                    <img src="../static/img/icons.png" alt="icons solielle" width="150px">
+                </div>
+                <p>
+                    A Editora Solielle nasceu de três amigas que amam histórias (e café em quantidades nada saudáveis).<br><br>
+                    Nosso objetivo é simples: <strong>dar voz a autores independentes e transformar ideias em livros que brilham 
+                    tanto quanto seus criadores.</strong><br><br>
+                    Acreditamos que literatura não precisa ser sisuda: ela pode <strong>emocionar</strong>, <strong>acolher</strong>, 
+                    <strong>provocar risadas</strong> e, às vezes, até dar aquele empurrãozinho filosófico na vida.<br><br>
+                    Aqui, cuidamos de cada detalhe – <strong>da revisão à diagramação</strong> – com o mesmo carinho de quem empresta um 
+                    livro favorito e fica fiscalizando se vai voltar ileso.<br><br>
+                    Se você escreve, sonha publicar ou só quer descobrir novas histórias, a Solielle está de portas abertas.
+                    <br>Porque <strong><span style="color: var(--terciary-color); filter: saturate(250%);">todo mundo merece ver sua voz ganhar páginas.</span></strong> 
+                </p>
+            </div>
+            <div id="contact">
+                <h2>Contato</h2>
+                <form onsubmit="event.preventDefault(); alert('Mensagem enviada!')">
+                    <input required placeholder="Seu nome">
+                    <input required type="email" placeholder="Seu email">
+                    <textarea placeholder="Mensagem"></textarea>
+                    <button class="btn" type="submit">Enviar</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer id="rodape">
+        <div class="container">
+            <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.2rem;">
+                <div>
+                    <h3>Links Rápidos</h3>
+                    <ul>
+                        <li><a href="#home">Início</a></li>
+                        <li><a href="#catalog">Catálogo</a></li>
+                        <li><a href="#authors">Autores</a></li>
+                        <li><a href="#blog">Notícias & Blog</a></li>
+                        <li><a href="#about">Sobre Nós</a></li>
+                        <li><a href="#contact">Contato</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Apoie a Editora</h3>
+                    <p>
+                        <a href="https://l.instagram.com/?u=https%3A%2F%2Fwww.vakinha.com.br%2F5567514%3Ffbclid%3DPAZXh0bgNhZW0CMTEAAaca6bLOCoVwiu0_LKrP9aGx8W97yXn7J7IaJvcrLvR-XUWe6jwt8Fl6Gb9VoQ_aem_vBC4fxN33GlF5ts3b866pQ&e=AT2AXcZZZE_xbMW65Ko6m8VI7GcFBcD4zQeonL38P2CG-9jFWpP55KIifG1ya7vMApJAWgAC_aPkRiSkdzphBUiU1xMkKsIRQFpaDfDKAKiBPqTaJBn6MX9O0A" title="Vakinha Solielle" target="_blank">
+                            Contribua na Vakinha
+                        </a>
+                    </p>
+                    <h3 style="margin-top: 1rem;">Portfólios</h3>
+                    <ul>
+                        <li>
+                            <a href="https://drive.google.com/file/d/190O5IB1iZAnQdyXx2pPvKioWtjoOFGdV/view?usp=drivesdk" target="_blank">
+                                Diagramadora e Editora
+                            </a>
+                        </li>
+                        <li>
+                            <a href="" target="_blank">
+                                Capista e Designer Gráfica
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://drive.google.com/file/d/1lc2n6B2zh8VpBCeLoYdzdITmhC4s3CNr/view?usp=sharing" target="_blank">
+                                Revisora
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Formulários</h3>
+                    <ul>
+                        <li>
+                            <a href="https://docs.google.com/forms/d/e/1FAIpQLSeuLLj8qdue8FNkwXUadNckLAtwEP9PboU8XOTdSHfVjYH35w/viewform?usp=dialog" target="_blank">
+                                Envio de Originais
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://docs.google.com/forms/d/e/1FAIpQLSeSeYj5bIRIAGef9VQE_rba2lNki4W94BnJCA9XTFt-L-OtaQ/viewform?usp=dialog" target="_blank">
+                                Solicitação de Serviços
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Redes Sociais</h3>
+                    <div style="display: flex; gap: .5rem; align-items: center;">
+                        <a href="https://www.instagram.com/editorasolielle" target="_blank">
+                            <i class="ri-instagram-fill"></i>
+                        </a>
+                        <a href="https://www.tiktok.com/@editora.solielle" target="_blank"> 
+                            <i class="ri-tiktok-fill"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <hr style="border: 0; border-top: 1px solid #BDBDBD; margin: 1.2rem 0">
+            <div style="display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap;" class="muted">
+                <span>© 2025 Editora Solielle – Todos os direitos reservados</span>
+                <span>Desenvolvido por <a href="https://www.instagram.com/luc4s_.r3is" target="_blank">Lucas Zorzete dos Reis</a></span>
+            </div>
+        </div>
+    </footer>
+    
+    <script src="../static/js/main.js"></script>
+    <script src="../static/js/reveal.js"></script>
+</body>
+</html>
