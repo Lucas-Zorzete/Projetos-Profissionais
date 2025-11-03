@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="../static/css/style.css">
     <link rel="stylesheet" href="../static/css/animations.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css">
+
+    <link rel="website icon" href="../static/img/logo.png">
 </head>
 <body>
     <header id="site-header">
@@ -31,10 +33,10 @@
                     </svg>
                     <span class="quantity"></span>
                 </button>
-                <button id="user-btn" title="Cadastrar ou Entrar"><i class="ri-account-circle-fill"></i></button>
+                <!-- <button id="user-btn" title="Cadastrar ou Entrar"><i class="ri-account-circle-fill"></i></button> -->
+                <button class="btn-theme" id="light-btn" title="Mudar para tema escuro"><img src="../static/img/bear.png" alt="tema claro" width="59px"></button>
+                <button class="btn-theme" id="night-btn" title="Mudar para tema claro"><img src="../static/img/wolf.png" alt="tema escuro" width="55px"></button>
             </nav>
-            <button class="btn-theme" id="light-btn" title="Mudar para tema escuro"><img src="../static/img/bear.png" alt="tema claro" width="59px"></button>
-            <button class="btn-theme" id="night-btn" title="Mudar para tema claro"><img src="../static/img/wolf.png" alt="tema escuro" width="55px"></button>
         </div>
     </header>   
 
@@ -67,15 +69,17 @@
                 <button class="clear" type="button" title="Limpar" aria-label="Limpar busca" id="clear-search">×</button>
             </form>
             <h2>Catálogo de Livros</h2>
-                <!-- <div style="display: flex; gap: .5rem; align-items: center;">
-                    <label for="genre" class="muted">Filtrar:</label>
-                    <select id="genre" aria-label="Filtrar por gênero">
-                        <option value="">Todos os gêneros</option>
-                        <option>Memórias</option>
-                        <option>Poesias</option>
-                    </select> -->
+            <!-- <div style="display: flex; gap: .5rem; align-items: center;">
+                <label for="genre" class="muted">Filtrar:</label>
+                <select id="genre" aria-label="Filtrar por gênero">
+                    <option value="">Todos os gêneros</option>
+                    <option>Memórias</option>
+                    <option>Poesias</option>
+                </select> -->
+            <div id="books-grid" class="grid cards reveal"></div>
         </div>
         <div class="results" id="results" aria-live="polite" aria-label="Resultados de pesquisa">
+        
         <header class="container">
             <strong>Resultados</strong>
             <span id="results-count" class="badge" style="margin-left: .6rem;">0</span>
@@ -83,8 +87,6 @@
             <div class="group container" id="results-authors"></div>
             <div class="group container" id="results-posts"></div>
         </header>
-    </div>
-        <div id="books-grid" class="grid cards reveal"></div>
     </section>
 
     <section id="authors">
