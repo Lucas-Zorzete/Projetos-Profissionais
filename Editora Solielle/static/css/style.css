@@ -372,11 +372,6 @@ section {
     border-radius: 14px;
     box-shadow: var(--shadow-blogs);
     overflow: hidden;
-    transition: transform .5s ease;
-}
-.post:hover {
-    transform: translateY(-10px);
-    filter: blur(100%);
 }
 .post img {
     width: 100%;

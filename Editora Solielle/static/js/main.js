@@ -1,6 +1,6 @@
 // ======= DADOS DA SOLIELLE =======
 const BOOKS = [
-  {id: 1, title:'Fragmentos de Mim', author:'Gabrielle Côrrea', genre:'Poesias • Autobiografia • Literatura profunda', price:24.99, cover:'../static/img/Fragmentos_de_Mim.jpg'},
+  {id: 1, title:'Fragmentos de Mim', author:'Gabrielle Côrrea', genre:'Poesias • Autobiografia • Literatura profunda', price:25, cover:'../static/img/Fragmentos_de_Mim.jpg'},
   {id: 2, title:'Onde o Tempo faz a Curva', author:'Thalita Monteiro', genre:'Memórias • Autobiografia', price:52, cover:'../static/img/Onde_o_Tempo_faz_a_Curva.jpg'},
   {id: 3, title:'Check-In Mental', author:'Gabrielle Côrrea', genre:'Ficção Psicológica • Cura Emocional', price:55, cover:'../static/img/Check-In_Mental.jpg'},
   {id: 4, title:'A Casa Onde Dormem as Mulheres', author:'Thalita Monteiro', genre:'Realismo Social • Feminilidade', price:50, cover:'../static/img/a_Casa_Onde_Dormem_as_Mulheres.jpg'}
@@ -39,7 +39,6 @@ const POSTS = [
   {id: 3, title:'Artigos que inspiram os autores', excerpt:'Confira as reflexões, curiosidades e textos curtos que estimulam os autores.', cover:'../static/img/artigos.png'}
 ];
 
-
 // ======= FUNÇÕES AUXILIARES =======
 const $ = (sel, el=document) => el.querySelector(sel);
 const $$ = (sel, el=document) => [...el.querySelectorAll(sel)];
@@ -54,7 +53,6 @@ const highlight = (text, q) => {
   return ntext.substring(0, realStart) + '<mark>' + ntext.substring(realStart, realStart + q.length) + '</mark>' + ntext.substring(realStart + q.length);
 };
 
-
 // ======= RENDERIZAÇÃO =======
 const booksGrid = $('#books-grid');
 const renderBooks = (list) => {
@@ -64,10 +62,15 @@ const renderBooks = (list) => {
       <div class="body">
         <h3>${b.title}</h3>
         <div class="meta">${b.author} • ${b.genre}</div>
-        <div class="price"><p>R$${b.price}</p></div>
+        <div class="price"><p>R$${b.price},00</p></div>
         <div class="buttons" style="display: flex; flex-direction: column; gap: .8rem">
-          <button class="btn" style="font-size: 1em" onclick="alert('Comprar: ${b.title} (demo)')">Comprar</button>
-          <button class="btn" style="background-color: #75B9B0" onclick="alert('Adicionar ao carrinho: ${b.title} (demo)')">Adicionar ao carrinho</button>
+          <button onclick="sendWhats('${b.title}', ${b.price})" class="btn" style="font-size: 1em">
+            <i class="ri-whatsapp-line" style="font-size: 1em; font-weight: 300;"></i> 
+            Comprar
+          </button>
+          <button class="btn btn-add" data-id="${b.id}" style="background-color: #75B9B0" onclick="addToCart()">
+            Adicionar ao carrinho
+          </button>
         </div>
       </div>
     </article>
@@ -118,7 +121,6 @@ renderBooks(BOOKS);
 renderAuthors(AUTHORS);
 renderPosts(POSTS);
 
-
 // ======= HEADER ENCOLHER AO SCROLL =======
 const siteHeader = $('#site-header');
 let lastY = 0;
@@ -157,69 +159,6 @@ const showSlide = (i)=>{
 const next = ()=> showSlide( (current+1) % slides.length );
 const restart = ()=>{ clearInterval(timer); timer = setInterval(next, 4500); };
 showSlide(0);
-
-
-// ======= PESQUISA GLOBAL =======
-const input = $('#search-input');
-const results = $('#results');
-const resultsCount = $('#results-count');
-const resBooks = $('#results-books');
-const resAuthors = $('#results-authors');
-const resPosts = $('#results-posts');
-const clearBtn = $('#clear-search');
-const genreSelect = $('#genre');
-
-const search = (q)=>{
-  const nq = norm(q);
-  const books = BOOKS.filter(b=> [b.title, b.author, b.genre].some(v=> norm(v).includes(nq)));
-  const authors = AUTHORS.filter(a=> [a.name, a.bio].some(v=> norm(v).includes(nq)));
-  const posts = POSTS.filter(p=> [p.title, p.excerpt].some(v=> norm(v).includes(nq)));
-
-  // Painel de resultados
-  const bHtml = books.length ? `<h4>Livros</h4>` + books.map(b=> `
-    <div class="result-item">
-      <img src="${b.cover}" alt="">
-      <div>
-        <div><strong>${highlight(b.title,q)}</strong></div>
-        <div class="muted">${highlight(b.author,q)} • ${b.genre}</div>
-      </div>
-    </div>`).join('') : '';
-
-  const aHtml = authors.length ? `<h4>Autores</h4>` + authors.map(a=> `
-    <div class="result-item">
-      <img src="${a.avatar}" alt="">
-      <div>
-        <div><strong>${highlight(a.name,q)}</strong></div>
-        <div class="muted">${highlight(a.bio,q)}</div>
-      </div>
-    </div>`).join('') : '';
-
-  const pHtml = posts.length ? `<h4>Posts</h4>` + posts.map(p=> `
-    <div class="result-item">
-      <img src="${p.cover}" alt="">
-      <div>
-        <div><strong>${highlight(p.title,q)}</strong></div>
-        <div class="muted">${highlight(p.excerpt,q)}</div>
-      </div>
-    </div>`).join('') : '';
-
-  resBooks.innerHTML = bHtml;
-  resAuthors.innerHTML = aHtml;
-  resPosts.innerHTML = pHtml;
-
-  const total = books.length + authors.length + posts.length;
-  resultsCount.textContent = total;
-  results.style.display = total ? 'block' : 'none';
-
-  // Atualiza o catálogo principal
-  const genre = genreSelect.value;
-  const visible = BOOKS.filter(b=> {
-    const matchesQ = nq ? [b.title, b.author, b.genre].some(v=> norm(v).includes(nq)) : true;
-    const matchesG = genre ? b.genre.includes(genre) : true;
-    return matchesQ && matchesG;
-  });
-  renderBooks(visible);
-};
 
 // Debounce
 let t; const debounced = (fn, wait=140) => (...args)=>{ clearTimeout(t); t=setTimeout(()=>fn(...args), wait); };

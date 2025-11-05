@@ -27,19 +27,35 @@
                 <a href="#contact">Contato</a>
             </nav>
             <nav class="user-buttons">
-                <button data-quantity="0" class="btn-cart" title="Carrinho">
+                <button data-quantity="0" class="btn-cart" id="cart-btn" title="Carrinho">
                     <svg class="icon-cart" viewBox="0 0 24.38 30.52" height="30.52" width="24.38" xmlns="http://www.w3.org/2000/svg">
                         <path transform="translate(-3.62 -0.85)" d="M28,27.3,26.24,7.51a.75.75,0,0,0-.76-.69h-3.7a6,6,0,0,0-12,0H6.13a.76.76,0,0,0-.76.69L3.62,27.3v.07a4.29,4.29,0,0,0,4.52,4H23.48a4.29,4.29,0,0,0,4.52-4ZM15.81,2.37a4.47,4.47,0,0,1,4.46,4.45H11.35a4.47,4.47,0,0,1,4.46-4.45Zm7.67,27.48H8.13a2.79,2.79,0,0,1-3-2.45L6.83,8.34h3V11a.76.76,0,0,0,1.52,0V8.34h8.92V11a.76.76,0,0,0,1.52,0V8.34h3L26.48,27.4a2.79,2.79,0,0,1-3,2.44Zm0,0"></path>
                     </svg>
-                    <span class="quantity"></span>
+                    <span class="quantity">0</span>
                 </button>
                 <!-- <button id="user-btn" title="Cadastrar ou Entrar"><i class="ri-account-circle-fill"></i></button> -->
                 <button class="btn-theme" id="light-btn" title="Mudar para tema escuro"><img src="../static/img/bear.png" alt="tema claro" width="59px"></button>
                 <button class="btn-theme" id="night-btn" title="Mudar para tema claro"><img src="../static/img/wolf.png" alt="tema escuro" width="55px"></button>
             </nav>
         </div>
-    </header>   
+    </header>
+    <div id="toast" class="toast"></div>
 
+    <div id="cart-popup" class="cart-popup">
+        <div class="cart-content">
+            <button id="close-cart" class="close-btn">&times;</button>
+            <div class="title-cart" style="display: flex; align-items: center; gap: .8rem">
+                <h2>Carrinho Solielle</h2>
+                <img src="../static/img/cat.png" alt="icon cat" width="50px" style="transform: rotate(30deg);">
+            </div>
+            <ul id="cart-items"></ul>
+            <div class="cart-footer">
+            <p>Total: <span id="cart-total">R$0,00</span></p>
+            <button onclick="finalizePurchase()" class="btn btn-finalize">Finalizar Compra</button>
+            </div>
+        </div>
+    </div>
+    
     <main id="home" class="container hero">
         <div class="banner reveal">
             <div>
@@ -124,12 +140,13 @@
             </div>
             <div id="contact">
                 <h2>Contato</h2>
-                <form onsubmit="event.preventDefault(); alert('Mensagem enviada!')">
+                <form id="contactForm" onsubmit="event.preventDefault(); alert('Mensagem enviada!')">
                     <input required placeholder="Seu nome">
                     <input required type="email" placeholder="Seu email">
                     <textarea placeholder="Mensagem"></textarea>
                     <button class="btn" type="submit">Enviar</button>
                 </form>
+                <!-- <p id="response"></p> -->
             </div>
         </div>
     </section>
@@ -210,6 +227,8 @@
     </footer>
     
     <script src="../static/js/main.js"></script>
-    <script src="../static/js/reveal.js"></script>
+    <script src="../static/js/cart.js"></script>
+    <script src="../static/js/global-search.js"></script>
+    <script src="../static/js/whats.js"></script>
 </body>
 </html>
