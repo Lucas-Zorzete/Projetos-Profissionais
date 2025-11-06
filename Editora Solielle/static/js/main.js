@@ -103,7 +103,7 @@ const postsList = $('#posts-list');
 const renderPosts = (list) => {
     postsList.style.gridTemplateColumns = 'repeat(auto-fill, minmax(320px, 1fr)';
     postsList.innerHTML = list.map(p => `
-    <article class="post reveal">
+    <article class="post reveal" data-id="${p.id}">
       <img src="${p.cover}" alt="Imagem do post ${p.title}">
       <div style="padding: .7rem; display:flex; flex-direction:column; justify-content: space-between; gap:.4rem;">
         <h3 style="font-size: 1em;">${p.title}</h3>
@@ -114,6 +114,14 @@ const renderPosts = (list) => {
       </div>
     </article>
   `).join('');
+
+  // --- Ativa o modal ao clicar ---
+  document.querySelectorAll('.post').forEach(post => {
+    post.addEventListener('click', () => {
+      const id = post.dataset.id;
+      openModal(id);
+    });
+  });
 };
 
 // Render inicial
