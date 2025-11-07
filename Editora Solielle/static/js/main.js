@@ -1,7 +1,7 @@
 // ======= DADOS DA SOLIELLE =======
 const BOOKS = [
-  {id: 1, title:'Fragmentos de Mim', author:'Gabrielle Côrrea', genre:'Poesias • Autobiografia • Literatura profunda', price:25, cover:'../static/img/Fragmentos_de_Mim.jpg'},
-  {id: 2, title:'Onde o Tempo faz a Curva', author:'Thalita Monteiro', genre:'Memórias • Autobiografia', price:52, cover:'../static/img/Onde_o_Tempo_faz_a_Curva.jpg'},
+  {id: 1, title:'Fragmentos de Mim', author:'Gabrielle Côrrea', genre:'Poesias • Autobiografia • Literatura profunda', price:24.99, cover:'../static/img/Fragmentos_de_Mim.jpg'},
+  {id: 2, title:'Onde o Tempo faz a Curva', author:'Thalita Monteiro', genre:'Memórias • Autobiografia', price:12.50, cover:'../static/img/Onde_o_Tempo_faz_a_Curva.jpg'},
 ];
 
 const AUTHORS = [
@@ -54,26 +54,30 @@ const highlight = (text, q) => {
 // ======= RENDERIZAÇÃO =======
 const booksGrid = $('#books-grid');
 const renderBooks = (list) => {
-  booksGrid.innerHTML = list.map(b => `
-    <article class="card" data-title="${b.title}" data-author="${b.author}" data-genre="${b.genre}">
-      <img class="cover" src="${b.cover}" alt="Capa do livro ${b.title}">
-      <div class="body">
-        <h3>${b.title}</h3>
-        <div class="meta">${b.author} • ${b.genre}</div>
-        <div class="price"><p>R$${b.price},00</p></div>
-        <div class="buttons" style="display: flex; flex-direction: column; gap: .8rem">
-          <button onclick="sendWhats('${b.title}', ${b.price})" class="btn" style="font-size: 1em">
-            <i class="ri-whatsapp-line" style="font-size: 1em; font-weight: 300;"></i> 
-            Comprar
-          </button>
-          <button class="btn btn-add" data-id="${b.id}" style="background-color: #75B9B0" onclick="addToCart()">
-            Adicionar ao carrinho
-          </button>
+  booksGrid.innerHTML = list.map(b => {
+    const price = parseFloat(b.price).toFixed(2).replace('.', ','); // garante decimais e vírgula
+    return `
+      <article class="card" data-title="${b.title}" data-author="${b.author}" data-genre="${b.genre}">
+        <img class="cover" src="${b.cover}" alt="Capa do livro ${b.title}">
+        <div class="body">
+          <h3>${b.title}</h3>
+          <div class="meta">${b.author} • ${b.genre}</div>
+          <div class="price"><p>R$ ${price}</p></div>
+          <div class="buttons" style="display: flex; flex-direction: column; gap: .8rem">
+            <button onclick="sendWhats('${b.title}', ${b.price})" class="btn" style="font-size: 1em">
+              <i class="ri-whatsapp-line" style="font-size: 1em; font-weight: 300;"></i> 
+              Comprar
+            </button>
+            <button class="btn btn-add" data-id="${b.id}" style="background-color: #75B9B0">
+              Adicionar ao carrinho
+            </button>
+          </div>
         </div>
-      </div>
-    </article>
-  `).join('');
+      </article>
+    `;
+  }).join('');
 };
+
 
 const authorsGrid = $('#authors-grid');
 const renderAuthors = (list) => {

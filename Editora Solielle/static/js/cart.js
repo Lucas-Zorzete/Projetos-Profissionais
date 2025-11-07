@@ -28,35 +28,37 @@ function updateCartQuantity(change) {
     quantitySpan.textContent = current;
 }
 
-
-// Função para atualizar a interface do carrinho
+/// Função para atualizar a interface do carrinho
 function updateCart() {
-    cartItems.innerHTML = cart.map(item => `
-        <li>
-        <img src="${item.cover}" alt="${item.title}">
-        <div style="flex:1; margin-left:10px">
+  cartItems.innerHTML = cart.map(item => `
+    <li>
+      <img src="${item.cover}" alt="${item.title}">
+      <div style="flex:1; margin-left:10px">
         <strong>${item.title}</strong><br>
-        <span>R$${item.price},00</span>
-        </div>
-        <button class="remove-btn" onclick="removeFromCart(${item.id})">✕</button>
-        </li>
-        `).join('');
-        
-        const total = cart.reduce((sum, i) => sum + i.price, 0);
-        cartTotal.textContent = `R$${total},00`;
-        quantitySpan.textContent = cart.length || '';
-    }
-    
-    // Função para adicionar ao carrinho
-    function addToCart(id) {
-        const book = BOOKS.find(b => b.id === id);
-        if (!book) return;
-        
-        cart.push(book);
-        updateCart();
-        updateCartQuantity(1);
-        showToast(`${book.title} adicionado ao carrinho!`);
-    }
+        <span>R$${item.price.toFixed(2)}</span>
+      </div>
+      <button class="remove-btn" onclick="removeFromCart(${item.id})">✕</button>
+    </li>
+  `).join('');
+
+  const total = cart.reduce((sum, i) => sum + i.price, 0);
+  cartTotal.textContent = `R$${total.toFixed(2).replace('.', ',')}`;
+  quantitySpan.textContent = cart.length || '';
+}
+
+// Função para adicionar ao carrinho
+function addToCart(id) {
+  const book = BOOKS.find(b => b.id === id);
+  if (!book) return;
+
+  // Garante que o preço seja numérico (caso venha como string)
+  book.price = parseFloat(book.price);
+
+  cart.push(book);
+  updateCart();
+  updateCartQuantity(1);
+  showToast(`${book.title} adicionado ao carrinho!`);
+}
 
 // Função para remover
 function removeFromCart(id) {
