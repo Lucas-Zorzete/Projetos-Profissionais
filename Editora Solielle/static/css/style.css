@@ -343,11 +343,7 @@ section {
     font-size: .84rem;
     opacity: .8;
 }
-.grid:hover .card {
-  filter: blur(3px) brightness(0.7);
-  transform: scale(0.95);
-}
-.grid .card:hover {
+.card:hover {
   filter: blur(0) brightness(1);
   transform: scale(1.05);
   z-index: 10; 

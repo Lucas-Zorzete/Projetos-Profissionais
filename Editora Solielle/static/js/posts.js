@@ -1,32 +1,32 @@
 const LAUNCHES = [
   {
-    id: 1,
-    title: "Entre o Sol e as Estrelas",
-    author: "Lara Menezes",
-    genre: "Romance • Autodescoberta",
-    release: "Novembro 2025",
-    cover: "../static/img/Entre_o_Sol_e_as_Estrelas.jpg",
-    desc: "Uma história sobre encontrar a luz mesmo nas noites mais escuras."
-  },
+    id: 1, 
+    title:'Check-In Mental', 
+    author:'Gabrielle Côrrea', 
+    genre:'Ficção Psicológica • Cura Emocional', 
+    cover:'../static/img/Check-In_Mental.jpg',
+    margintop: 50,
+    bio: "Na Residência Psique, um refúgio voltado à saúde mental, hóspedes enfrentam seus traumas e emoções profundas sob o olhar sensível de Luna, a recepcionista que narra histórias de dor, superação e empatia. Um retrato humano sobre reconstrução interior e o poder de ouvir e ser ouvido."
+},
   {
-    id: 2,
-    title: "A Canção das Marés",
-    author: "Daniela Luz",
-    genre: "Ficção • Natureza • Poético",
-    release: "Novembro 2025",
-    cover: "../static/img/A_Cancao_das_Mares.jpg",
-    desc: "Uma narrativa poética sobre amor, cura e o chamado do oceano."
-  }
+    id: 2, 
+    title:'A Casa Onde Dormem as Mulheres', 
+    author:'Thalita Monteiro', 
+    genre:'Realismo Social • Feminilidade', 
+    cover:'../static/img/a_Casa_Onde_Dormem_as_Mulheres.jpg',
+    bio: "Em A Casa Onde Dormem as Mulheres, vítimas de violências e perdas encontram refúgio para curar suas feridas e reencontrar a própria voz. A obra é um relato poético sobre dor, resistência, perdão e renascimento feminino."
+}
 ];
 
 const ARTICLES = [
-  { img: "../static/img/artigo1.png" },
-  { img: "../static/img/artigo2.png" },
-  { img: "../static/img/artigo3.png" },
-  { img: "../static/img/artigo4.png" },
-  { img: "../static/img/artigo5.png" },
-  { img: "../static/img/artigo6.png" },
+  { img: "../static/img/artigo1.png", caption: "Para alguns, é só um caderno e uma caneta. Para outros, é o único jeito de manter a sanidade. 🖋✨" },
+  { img: "../static/img/artigo2.png", caption: "Nem toda escrita precisa de aplausos. Às vezes, é só a alma pedindo para respirar entre as linhas. 📝💛" },
+  { img: "../static/img/artigo3.png", caption: "✨ Quantas vezes você já imaginou segurar sua própria história impressa? Sentir o peso dos seus personagens, das suas palavras, do seu sonho realizado?" },
+  { img: "../static/img/artigo4.png", caption: "📝✨ Quando o coração fala mais alto que a razão… Essa é uma das declarações mais intensas da literatura, capaz de tocar até os sentimentos mais adormecidos 💛" },
+  { img: "../static/img/artigo5.png", caption: "Algumas perdas podem ser encontradas no tempo certo, outras, jamais deveriam ter sido deixadas para trás. Uma lembrança de sabedoria direto da Terra Média com Gandalf, o Cinzento. ✨" },
+  { img: "../static/img/artigo6.png", caption: "📚 Da nossa editora pra você, que escreve, sente, sonha e segue mesmo com frio na barriga. O show é seu. 💫" }
 ];
+
 
 // ====== POP-UP DE LANÇAMENTOS ======
 const launchModal = $('#launch-modal');
@@ -46,10 +46,10 @@ function openLaunchModal() {
     launchGrid.innerHTML = LAUNCHES.map(b => `
       <div class="launch-card">
         <img src="${b.cover}" alt="Capa do livro ${b.title}">
-        <h4>${b.title}</h4>
+        <h4 style="margin-top: ${b.margintop}px">${b.title}</h4>
         <p><strong>${b.author}</strong></p>
         <p>${b.genre}</p>
-        <p><em>${b.release}</em></p>
+        <p>${b.bio}</p>
       </div>
     `).join('');
   }
@@ -81,16 +81,28 @@ function openArticlesModal() {
     articlesGrid.innerHTML = `<p style="text-align:center;color:#777;">Nenhum artigo publicado ainda 💭</p>`;
   } else {
     articlesGrid.innerHTML = ARTICLES.map(a => `
-      <img src="${a.img}" alt="Imagem de artigo" class="article-img">
+      <div class="article-item">
+        <img src="${a.img}" alt="Imagem de artigo" class="article-img">
+        <p class="article-caption">${a.caption}</p>
+      </div>
     `).join('');
   }
 
   articlesModal.style.display = 'flex';
+  document.body.style.overflow = 'hidden'; // impede scroll do fundo
 }
 
 // Fecha o modal
-closeArticlesBtn.onclick = () => articlesModal.style.display = 'none';
-window.onclick = (e) => { if (e.target === articlesModal) articlesModal.style.display = 'none'; };
+closeArticlesBtn.onclick = () => {
+  articlesModal.style.display = 'none';
+  document.body.style.overflow = 'auto';
+};
+window.onclick = (e) => { 
+  if (e.target === articlesModal) {
+    articlesModal.style.display = 'none';
+    document.body.style.overflow = 'auto';
+  }
+};
 
 // ===== Visualizador de imagem ampliada =====
 const imgViewer = document.createElement('div');

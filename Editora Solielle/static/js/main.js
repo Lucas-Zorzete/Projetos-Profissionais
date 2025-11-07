@@ -2,8 +2,6 @@
 const BOOKS = [
   {id: 1, title:'Fragmentos de Mim', author:'Gabrielle Côrrea', genre:'Poesias • Autobiografia • Literatura profunda', price:25, cover:'../static/img/Fragmentos_de_Mim.jpg'},
   {id: 2, title:'Onde o Tempo faz a Curva', author:'Thalita Monteiro', genre:'Memórias • Autobiografia', price:52, cover:'../static/img/Onde_o_Tempo_faz_a_Curva.jpg'},
-  {id: 3, title:'Check-In Mental', author:'Gabrielle Côrrea', genre:'Ficção Psicológica • Cura Emocional', price:55, cover:'../static/img/Check-In_Mental.jpg'},
-  {id: 4, title:'A Casa Onde Dormem as Mulheres', author:'Thalita Monteiro', genre:'Realismo Social • Feminilidade', price:50, cover:'../static/img/a_Casa_Onde_Dormem_as_Mulheres.jpg'}
 ];
 
 const AUTHORS = [
