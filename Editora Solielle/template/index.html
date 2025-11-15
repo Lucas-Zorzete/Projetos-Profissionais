@@ -6,7 +6,8 @@
     <title>Editora Solielle</title>
     <link rel="stylesheet" href="../static/css/style.css">
     <link rel="stylesheet" href="../static/css/animations.css">
-    <link rel="stylesheet" href="../static/css/posts.css">
+    <link rel="stylesheet" href="../static/css/pop-up.css">
+    <link rel="stylesheet" href="../static/css/darkTheme.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css">
 
     <link rel="website icon" href="../static/img/logo.png">
@@ -15,6 +16,8 @@
     <header id="site-header">
         <img id="item-left" class="item" src="../static/img/header item left.png" alt="detalhe esquerda" width="52.5px">
         <img id="item-right" class="item" src="../static/img/header item right.png" alt="detalhe direita" width="53px">
+        <img id="item-left-night" class="item" src="../static/img/item-night-left.png" alt="detalhe esquerda" width="52px">
+        <img id="item-right-night" class="item" src="../static/img/item-night-right.png" alt="detalhe direita" width="53.8px">
         <div class="wrap container">
             <img src="../static/img/logo dark.png" alt="logo tema escuro" width="100px" id="brand-light">
             <img src="../static/img/logo light.png" alt="logo tema claro" width="100px" id="brand-night">
@@ -37,9 +40,52 @@
                 <!-- <button id="user-btn" title="Cadastrar ou Entrar"><i class="ri-account-circle-fill"></i></button> -->
                 <button class="btn-theme" id="light-btn" title="Mudar para tema escuro"><img src="../static/img/bear.png" alt="tema claro" width="59px"></button>
                 <button class="btn-theme" id="night-btn" title="Mudar para tema claro"><img src="../static/img/wolf.png" alt="tema escuro" width="55px"></button>
+                <script>
+                    // === Botão de tema escuro e claro ===
+                    const themeBtnLight = document.getElementById("light-btn");
+                    const themeBtnDark = document.getElementById("night-btn");
+
+                    themeBtnLight.addEventListener("click", () => {
+                        document.body.classList.toggle("darkTheme");
+                    });
+                    themeBtnDark.addEventListener('click', () => {
+                        document.body.classList.remove("darkTheme");
+                    });
+                    themeBtnLight.addEventListener("click", () => {
+                        themeBtnLight.style.display = "none";
+                        themeBtnDark.style.display = "block";
+                    });
+                    themeBtnDark.addEventListener("click", () => {
+                        themeBtnDark.style.display = "none";
+                        themeBtnLight.style.display = "block";
+                    });
+                </script>
             </nav>
         </div>
     </header>
+    <header id="secondary-header">
+        <div class="secondary-container">
+            <nav class="secondary-menu">
+                <a href="#home">Início</a>
+                <a href="#catalog">Catálogo</a>
+                <a href="#authors">Autores</a>
+                <a href="#blog">N&B</a>
+                <a href="#about">Sobre</a>
+                <a href="#contact">Contato</a>
+            </nav>  
+        </div>
+    </header>
+
+    <script>
+        window.addEventListener("scroll", function() {
+            const header = document.getElementById("secondary-header");
+            if (window.scrollY > 50) {
+            header.classList.add("shrink");
+            } else {
+            header.classList.remove("shrink");
+            }
+        });
+    </script>
     <div id="toast" class="toast"></div>
 
     <div id="cart-popup" class="cart-popup">
@@ -51,8 +97,8 @@
             </div>
             <ul id="cart-items"></ul>
             <div class="cart-footer">
-            <p>Total: <span id="cart-total">R$0,00</span></p>
-            <button onclick="finalizePurchase()" class="btn btn-finalize">Finalizar Compra</button>
+                <p>Total: <span id="cart-total">R$0,00</span></p>
+                <button onclick="finalizePurchase()" class="btn btn-finalize">Finalizar Compra</button>
             </div>
         </div>
     </div>
@@ -80,11 +126,14 @@
 
     <section id="catalog">
         <div class="container">
-            <form class="searchbar" role="search" aria-label="Pesquisar no site" onsubmit="event.preventDefault()">
-                <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor">"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-                <input type="search" id="search-input" placeholder="Pesquisar livros, autores, posts..." autocomplete="off" aria-controls="results">
+            <!-- <form class="searchbar" role="search" aria-label="Pesquisar no site" onsubmit="event.preventDefault()">
+                 <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor">"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg> -->
+                <!-- <input type="search" id="search-input" placeholder="Pesquisar livros, autores, posts..." autocomplete="off" aria-controls="results">
                 <button class="clear" type="button" title="Limpar" aria-label="Limpar busca" id="clear-search">×</button>
-            </form>
+                <div class="search-results" id="searchResults">
+                    <!-- Resultados aparecem aqui
+                </div>
+            </form> -->
             <h2>Catálogo de Livros</h2>
             <!-- <div style="display: flex; gap: .5rem; align-items: center;">
                 <label for="genre" class="muted">Filtrar:</label>
@@ -95,15 +144,6 @@
                 </select> -->
             <div id="books-grid" class="grid cards reveal"></div>
         </div>
-        <div class="results" id="results" aria-live="polite" aria-label="Resultados de pesquisa">
-        
-        <header class="container">
-            <strong>Resultados</strong>
-            <span id="results-count" class="badge" style="margin-left: .6rem;">0</span>
-            <div class="group container" id="results-books"></div>
-            <div class="group container" id="results-authors"></div>
-            <div class="group container" id="results-posts"></div>
-        </header>
     </section>
 
     <section id="authors">
@@ -124,6 +164,13 @@
                 <h2 class="modal-title">📚 Lançamentos da Solielle</h2>
                 <div id="launch-grid" class="launch-grid"></div>
                 <p id="no-launches" class="no-launches">Nenhum lançamento disponível no momento 💭</p>
+            </div>
+        </div>
+        <div id="recom-modal" class="modal">
+            <div class="modal-content recom-content">
+                <span class="close-btn">&times;</span>
+                <h2 class="modal-title">💡 Recomendações e Dicas dos Autores</h2>
+                <div id="recom-list" class="recom-list"></div>
             </div>
         </div>
         <div id="articles-modal" class="modal">
@@ -235,16 +282,36 @@
                 </div>
             </div>
             <hr style="border: 0; border-top: 1px solid #BDBDBD; margin: 1.2rem 0">
-            <div style="display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap;" class="muted">
+            <div style="display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap;" class="muted footer">
                 <span>© 2025 Editora Solielle – Todos os direitos reservados</span>
                 <span>Desenvolvido por <a href="https://www.instagram.com/luc4s_.r3is" target="_blank">Lucas Zorzete dos Reis</a></span>
             </div>
         </div>
     </footer>
     
+    <div id="bookModal" class="modal">
+        <div class="modal-content">
+            <span id="closeModal" class="close">&times;</span>
+
+            <div class="modal-body">
+            <img id="modalCover" src="" alt="Capa do livro">
+            
+            <div class="modal-info">
+                <h2 id="modalTitle"></h2>
+                <p class="author" id="modalAuthor"></p>
+                <p class="genre" id="modalGenre"></p>
+                <p class="sinopse" id="modalSinopse"></p>
+
+                <p class="price" id="modalPrice"></p>
+
+                <button id="modalBuy" class="btn-buy">Comprar</button>
+            </div>
+            </div>
+        </div>
+    </div>
+
     <script src="../static/js/main.js"></script>
     <script src="../static/js/cart.js"></script>
-    <script src="../static/js/global-search.js"></script>
     <script src="../static/js/whats.js"></script>
     <script src="../static/js/posts.js"></script>
 </body>

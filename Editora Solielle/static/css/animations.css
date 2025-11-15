@@ -7,7 +7,6 @@
   justify-content: center;
   width: 50px;
   height: 50px;
-  border-radius: 10px;
   border: none;
   background-color: transparent;
   position: relative;
@@ -34,7 +33,6 @@
 }
 
 .icon-cart path {
-  fill: var();
   transition: .2s linear;
 }
 
@@ -78,18 +76,26 @@
   justify-content: center;
   width: 100%;
   height: 100%;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
   border: 1px solid #e9c56a8a;
   box-shadow: var(--shadow-secondary);
   border-radius: 1rem;
   padding: 1.5rem;
   color: #383838;
 }
+@media (max-width: 1040px) {
+  .team {
+    perspective: none; /* remove o 3D */
+  }
+  .card-front {
+    display: none;
+  }
+  .card-inner {
+    transform: rotateY(180deg) !important; /* fica sempre virado */
+  }
+}
 .card-front {
   text-align: center;
 }
-
 .card-back {
   transform: rotateY(180deg);
 }

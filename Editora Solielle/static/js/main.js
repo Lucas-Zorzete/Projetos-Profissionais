@@ -1,8 +1,27 @@
 // ======= DADOS DA SOLIELLE =======
 const BOOKS = [
-  {id: 1, title:'Fragmentos de Mim', author:'Gabrielle Côrrea', genre:'Poesias • Autobiografia • Literatura profunda', price:24.99, cover:'../static/img/Fragmentos_de_Mim.jpg'},
-  {id: 2, title:'Onde o Tempo faz a Curva', author:'Thalita Monteiro', genre:'Memórias • Autobiografia', price:12.50, cover:'../static/img/Onde_o_Tempo_faz_a_Curva.jpg'},
+  {
+    id: 1,
+    link: "#livroA",
+    title:'Fragmentos de Mim',
+    author:'Gabrielle Côrrea',
+    genre:'Poesias • Autobiografia • Literatura profunda',
+    price:24.99,
+    cover:'../static/img/Fragmentos_de_Mim.jpg',
+    sinopse: 'O livro Fragmentos de Mim reúne poemas que registram as emoções e descobertas de uma jovem de quinze anos enquanto ela tenta entender a si mesma. Cada texto funciona como um retrato de seus conflitos, afetos e inseguranças, revelando o amadurecimento emocional típico da adolescência. É uma obra que busca conexão com o leitor ao revisitar experiências e sentimentos comuns a essa fase da vida.'
+  },
+  {
+    id: 2,
+    link: "#livroB",
+    title:'Onde o Tempo faz a Curva',
+    author:'Thalita Monteiro',
+    genre:'Memórias • Autobiografia',
+    price:12.50,
+    cover:'../static/img/Onde_o_Tempo_faz_a_Curva.jpg',
+    sinopse: 'Este livro revela, de forma franca, a trajetória de quem cresceu entre traumas, instabilidade emocional e a luta diária contra a depressão. Entre relatos de autodestruição, confusão interna e solidão, também surgem momentos de resistência: amizades que seguraram a dor, o apoio imperfeito da mãe e a escrita como refúgio quando nada mais fazia sentido. Não é uma história de superação idealizada, mas um testemunho real de quem já se sentiu quebrado, exausto e sem saída — e ainda assim encontrou pequenos motivos para continuar.'
+  }
 ];
+
 
 const AUTHORS = [
   {
@@ -37,6 +56,41 @@ const POSTS = [
   {id: 3, title:'Artigos que inspiram os autores', excerpt:'Confira as reflexões, curiosidades e textos curtos que estimulam os autores.', cover:'../static/img/artigos.png'}
 ];
 
+// const searchInput = document.getElementById("search-input");
+// const searchResults = document.getElementById("searchResults");
+
+// const dadosExemplo = [
+//     { nome: "Fragmentos de Mim", link: "#livroA" },
+//     { nome: "Autor João", link: "#autorJoao" },
+//     { nome: "Notícia importante", link: "#noticias" },
+//     { nome: "Post do blog sobre escrita", link: "#blog" }
+// ];
+
+
+// searchInput.addEventListener("input", () => {
+//     const texto = searchInput.value.toLowerCase();
+
+//     if (texto.trim() === "") {
+//         searchResults.style.display = "none";
+//         searchResults.innerHTML = "";
+//         return;
+//     }
+
+//     const filtrados = dadosExemplo.filter(item =>
+//         item.toLowerCase().includes(texto)
+//     );
+
+//     if (filtrados.length === 0) {
+//         searchResults.innerHTML = `<div class="result-item">Nenhum resultado encontrado</div>`;
+//     } else {
+//         searchResults.innerHTML = filtrados
+//             .map(item => `<div class="result-item">${item}</div>`)
+//             .join("");
+//     }
+
+//     searchResults.style.display = "block";
+// });
+
 // ======= FUNÇÕES AUXILIARES =======
 const $ = (sel, el=document) => el.querySelector(sel);
 const $$ = (sel, el=document) => [...el.querySelectorAll(sel)];
@@ -58,7 +112,7 @@ const renderBooks = (list) => {
     const price = parseFloat(b.price).toFixed(2).replace('.', ','); // garante decimais e vírgula
     return `
       <article class="card" data-title="${b.title}" data-author="${b.author}" data-genre="${b.genre}">
-        <img class="cover" src="${b.cover}" alt="Capa do livro ${b.title}">
+        <img class="cover" src="${b.cover}" alt="Capa do livro ${b.title}" id="${b.link}">
         <div class="body">
           <h3>${b.title}</h3>
           <div class="meta">${b.author} • ${b.genre}</div>
@@ -77,7 +131,6 @@ const renderBooks = (list) => {
     `;
   }).join('');
 };
-
 
 const authorsGrid = $('#authors-grid');
 const renderAuthors = (list) => {
@@ -110,7 +163,7 @@ const renderPosts = (list) => {
       <div style="padding: .7rem; display:flex; flex-direction:column; justify-content: space-between; gap:.4rem;">
         <h3 style="font-size: 1em;">${p.title}</h3>
         <p class="muted" style="font-size: .8em;">${p.excerpt}</p>
-        <a class="btn more" href="#" style="display: flex; align-items: center; gap: .8rem; font-size: .9em; padding: .7rem;">
+        <a class="btn more" style="display: flex; align-items: center; gap: .8rem; font-size: .9em; padding: .7rem;">
             Ler mais <i class="ri-arrow-right-long-line" style="font-size: 1.4em;"></i>
         </a>
       </div>
@@ -130,6 +183,41 @@ const renderPosts = (list) => {
 renderBooks(BOOKS);
 renderAuthors(AUTHORS);
 renderPosts(POSTS);
+
+const modal = document.getElementById("bookModal");
+const closeModal = document.getElementById("closeModal");
+
+const modalCover = document.getElementById("modalCover");
+const modalTitle = document.getElementById("modalTitle");
+const modalAuthor = document.getElementById("modalAuthor");
+const modalGenre = document.getElementById("modalGenre");
+const modalSinopse = document.getElementById("modalSinopse");
+const modalPrice = document.getElementById("modalPrice");
+const modalBuy = document.getElementById("modalBuy");
+
+document.addEventListener("click", e => {
+    const card = e.target.closest(".card");
+    if (!card) return;
+
+    const title = card.dataset.title;
+    const book = BOOKS.find(b => b.title === title);
+
+    if (book) {
+        modalCover.src = book.cover;
+        modalTitle.textContent = book.title;
+        modalAuthor.textContent = book.author;
+        modalGenre.textContent = book.genre;
+        modalSinopse.textContent = book.sinopse;
+        modalPrice.textContent = `R$ ${book.price.toFixed(2)}`;
+        
+        modalBuy.onclick = () => sendWhats(book.title, book.price);
+
+        modal.style.display = "flex";
+    }
+});
+
+closeModal.onclick = () => modal.style.display = "none";
+window.onclick = e => { if (e.target === modal) modal.style.display = "none"; }
 
 // ======= HEADER ENCOLHER AO SCROLL =======
 const siteHeader = $('#site-header');
@@ -179,27 +267,6 @@ input.addEventListener('input', debounced(()=>{
   history.replaceState({},'', url);
   search(q);
 }, 160));
-
-clearBtn.addEventListener('click', ()=>{
-  input.value=''; input.focus(); search('');
-  const url = new URL(location); url.searchParams.delete('q'); history.replaceState({},'', url);
-});
-
-// Fecha painel de resultados ao clicar fora
-document.addEventListener('click', (e)=>{
-  if(results.style.display==='block'){
-    const within = results.contains(e.target) || $('.searchbar').contains(e.target);
-    if(!within) results.style.display='none';
-  }
-});
-
-// Filtro por gênero
-genreSelect.addEventListener('change', ()=> search(input.value.trim()));
-
-// Carrega busca inicial
-const params = new URLSearchParams(location.search);
-const initialQ = params.get('q') || '';
-if(initialQ){ input.value = initialQ; search(initialQ); }
 
 // Atalhos de teclado
 addEventListener('keydown', (e)=>{

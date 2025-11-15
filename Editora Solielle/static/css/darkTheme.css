@@ -1,0 +1,183 @@
+/* TEMA ESCURO */
+body.darkTheme {
+    background-color: #1a1a1a;
+    color: #cecece;
+}
+
+/* HEADER */
+body.darkTheme #brand-night {
+    display: block;
+}
+body.darkTheme #brand-light {
+    display: none;
+}
+
+body.darkTheme #item-left-night {
+    display: block;
+}
+body.darkTheme #item-right-night {
+    display: block;
+}
+body.darkTheme #item-left {
+    display: none;
+}
+body.darkTheme #item-right {
+    display: none;
+}
+
+body.darkTheme header {
+    background-color: #3d3d3d;
+}
+
+body.darkTheme header nav a,
+body.darkTheme header button {
+    color: #D3D3D3;
+}
+
+body.darkTheme a:hover, 
+body.darkTheme a:focus {
+    color: #6febdc;
+}
+
+body.darkTheme header button,
+body.darkTheme .btn-cart {
+    background-color: transparent;
+    fill: #FFF;
+}
+body.darkTheme .btn-cart:hover > .icon-cart path {
+    fill: #6febdc;
+}
+body.darkTheme .btn-cart::after {
+    color: #D3D3D3;
+}
+
+/* CONTAINER SECUNDÁRIO */
+body.darkTheme #secondary-header {
+    background-color: #4b4b4b;
+}
+
+/* CARRINHO */
+body.darkTheme .cart-content {
+    background-color: #3d3d3d;
+}
+body.darkTheme .close-btn {
+    color: #D3D3D3;
+}
+body.darkTheme .remove-btn {
+    color: #D3D3D3;
+}
+body.darkTheme .cart-footer p {
+    color: #D3D3D3;
+}
+
+/* BANNER */
+body.darkTheme .banner h1,
+body.darkTheme .banner p {
+    color: #FFFFFF;
+}
+
+body.darkTheme .banner {
+    background: linear-gradient(120deg, #2d5852, #a7a7a7);
+}
+
+body.darkTheme .banner .btn-ver-catalogo {
+    background-color: #37DFCB;
+    color: #000;
+}
+
+/* INPUTS */
+body.darkTheme input,
+body.darkTheme textarea,
+body.darkTheme select {
+    background-color: #C9C9C9;
+    color: #000;
+    border: 1px solid #bcbcbc;
+}
+
+body.darkTheme .icon {
+    color:#292929;
+}
+
+/* TÍTULOS DAS SEÇÕES */
+body.darkTheme section h2,
+body.darkTheme section h1 {
+    color: #DEDEDE;
+}
+
+/* CARDS (CATÁLOGO, AUTORES, NOTÍCIAS, BLOG) */
+body.darkTheme .card,
+body.darkTheme .card-front,
+body.darkTheme .card-back {
+    background-color: #333333;
+    color: #CDCDCD;
+    box-shadow: 0 0 35px #1d00628e;
+    border: none;
+}   
+
+/* POSTS */
+body.darkTheme .post {
+    background-color: #333333;
+    color:#CDCDCD;
+}
+body.darkTheme .post .muted {
+    color: #a7a7a7;
+}
+body.darkTheme input:focus, textarea:focus, select:focus {
+    border-color: #3d6f83b4;
+    box-shadow: 0 0 10px color-mix(in srgb, #6febdc 80%, transparent);
+}
+
+body.darkTheme .modal-content {
+    background-color: #333333;
+}
+
+body.darkTheme .launch-card {
+    background-color: #3d3d3d;
+    border: 1px solid #4b4b4b;
+}
+body.darkTheme .launch-card p {
+    color: #CDCDCD;
+}
+body.darkTheme .launch-card h4 {
+    color: #ebebeb;
+}
+
+body.darkTheme .recom-item {
+    border: 1px solid #4b4b4b;
+}
+body.darkTheme .recom-item i {
+    color: #CDCDCD;
+}
+body.darkTheme .recom-header {
+    background-color: #3d3d3d;
+}
+body.darkTheme .recom-header span {
+    color: #CDCDCD;
+}
+body.darkTheme .recom-body {
+    color: #CDCDCD;
+}
+
+body.darkTheme .article-caption {
+    color: #CDCDCD;
+}
+
+/* Se tiver títulos dentro dos cards */
+body.darkTheme .card h3,
+body.darkTheme .card h4 {
+    color: #DEDEDE;
+}
+
+/* FOOTER */
+body.darkTheme footer {
+    background-color: #3F3F3F;
+    color: #DEDEDE;
+}
+
+body.darkTheme footer a {
+    color: #DEDEDE;
+}
+
+body.darkTheme footer span {
+    color: #aaaaaa;
+}

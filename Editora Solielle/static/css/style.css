@@ -64,7 +64,7 @@ i {
 }
 
 .container {
-    width: min(1180px, 92vw);
+    width: min(1180px, 86vw);
     margin-inline: auto;
 }
 
@@ -108,8 +108,14 @@ i {
     transition: 200ms;
 }
 
-/* FUTURAMENTE MEXIDOS */
 #night-btn {
+    display: none;
+}
+
+#item-left-night {
+    display: none;
+}
+#item-right-night {
     display: none;
 }
 
@@ -119,6 +125,9 @@ i {
 
 .muted {
     color: var(--description);
+}
+.muted.footer {
+    font-size: .9em;
 }
 
 .bedge {
@@ -142,7 +151,7 @@ i {
 header {
     position: sticky;
     top: 0;
-    z-index: 50;
+    z-index: 55;
     backdrop-filter: saturate(120%) blur(6px);
     background: var(--bg-color);
     width: 100%;
@@ -161,10 +170,22 @@ header.shrink .wrap {
     padding: .30rem .8rem;
 }
 header.shrink #item-left {
-    width: 49px;
+    transition: 200ms linear;
+    width: 35px;
+    height: 110px;
 }
 header.shrink #item-right {
-    width: 49.5px;
+    transition: 200ms linear;
+    width: 35.5px;
+    height: 110px;
+}
+header.shrink #item-left-night {
+    width: 38.1px;
+    height: 110px;
+}
+header.shrink #item-right-night {
+    width: 39.5px;
+    height: 110px;
 }
 .item {
     position: absolute;
@@ -173,6 +194,12 @@ header.shrink #item-right {
     left: 0;
 }
 #item-right {
+    right: 0;
+}
+#item-left-night {
+    left: 0;
+}
+#item-right-night {
     right: 0;
 }
 
@@ -186,9 +213,104 @@ nav {
        border-radius: 10px;
        font-weight: 600;
    }
+   button {
+    border: none;
+   }
 }
 nav a:hover {
     background-color: #2a9d901e;
+}
+
+/* ===== Secondary Header ===== */
+#secondary-header {
+  width: 100%;
+  background: #f8f8f8;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+  display: none; /* escondido por padrão */
+}
+
+#secondary-header.shrink {
+  transform: scale(0.98);
+  background: #ececec;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+/* ===== Container Central ===== */
+.secondary-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ===== Menu Interno ===== */
+.secondary-menu {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.secondary-menu a {
+  color: #333;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.secondary-menu a:hover {
+  color: #007272;
+  transform: scale(1.05);
+}
+
+/* ===== Responsividade ===== */
+
+/* 🔹 Mobile e tablet */
+@media (max-width: 1040px) {
+  #secondary-header {
+    display: none;
+  }
+
+  header .menu-buttons {
+    display: flex;
+  }
+
+  .secondary-menu {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .secondary-container {
+    padding: 8px 10px;
+  }
+}
+
+/* 🔹 Desktop */
+@media (max-width: 1041px) {
+  #secondary-header {
+    display: block;
+  }
+
+  header .menu-buttons {
+    display: none;
+  }
+
+  .secondary-menu {
+    flex-direction: row;
+  }
+}
+
+/* 🔹 Ajuste extra para telas muito grandes */
+@media (min-width: 1600px) {
+  .secondary-container {
+    max-width: 1400px;
+  }
 }
 
 #user-btn {
@@ -210,7 +332,7 @@ nav a:hover {
     position: relative;
     border-radius: 16px;
     overflow: hidden;
-    background: linear-gradient(120deg, #ddfff9, #fff);
+    background: linear-gradient(120deg, #c0fcf1, #fff);
     box-shadow: 0 0 30px #0000002d;
     border: #E4E4E4;
     display: grid;
@@ -218,7 +340,6 @@ nav a:hover {
     gap: 1rem;
     align-items: center;
     padding: clamp(1rem, 2.2vw, 2rem);
-
     h1 {
         margin: .2rem 0;
         font-size: clamp(1.6rem, 3.6vw, 2.6rem);
@@ -228,6 +349,11 @@ nav a:hover {
         margin: .6rem 0 1rem;
     }
 }   
+
+@media (max-width: 530px) {
+    .banner { height: 40em; }
+}
+
 .slides {
     position: relative;
     height: 320px;
@@ -238,8 +364,7 @@ nav a:hover {
     position: absolute;
     inset: 0;
     opacity: 0;
-    transition: opacity .6s ease;
-    background: #ddd center/cover;
+    transition: opacity .6s ease;  
 }
 .slide.active {
     opacity: 1;
@@ -261,9 +386,9 @@ nav a:hover {
     background: var(--primary-color);
 }
 
-.searchbar {
+/* .searchbar {
     position: relative;
-    width: min(380px, 46vw);  /* 552px de largura da tela */
+    width: min(380px, 46vw);
     margin-bottom: 2.7rem;
 }
 .searchbar input {
@@ -301,6 +426,33 @@ nav a:hover {
 .searchbar .clear:hover {
     color: var(--secondary-color);
 }
+input[type="search"]::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+}
+.search-results {
+    position: absolute;
+    top: 110%;
+    left: 0;
+    width: 100%;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    padding: 8px 0;
+    display: none;
+    z-index: 1000;
+}
+
+.search-results .result-item {
+    padding: 10px 15px;
+    font-size: 15px;
+    color: #333;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.search-results .result-item:hover {
+    background-color: #eeeeee;
+} */
 
 section {
     padding: 2.6rem 0;
@@ -323,6 +475,7 @@ section {
     display: flex;
     flex-direction: column;
     transition: transform 0.3s ease, filter 0.3s ease;
+    cursor: pointer;
 }
 .card .cover {
     aspect-ratio: 3/5;
@@ -409,34 +562,6 @@ textarea {
     resize: vertical;
 }
 
-.results {
-    position: fixed;
-    left: 50%;
-    transform: translateX(-50%);
-    top: 76px;
-    width: min(900px, 92vw);
-    background-color: var(--bg-color);
-    border-radius: 16px;
-    box-shadow: var(--shadow);
-    display: none;
-    z-index: 60;
-    max-height: 70vh;  /* ocupa 70% da altura vísivel da tela */
-    overflow: auto;
-}
-.results header {
-    position: sticky;
-    top: 0;
-    background: var(--bg-color);
-    padding: .8rem 1rem;
-    border-bottom: 1px solid #eee;
-    box-shadow: none;
-}
-.results .group {
-    padding: 1rem;
-}
-.results h4 {
-    margin: .2rem 0 .6rem;
-}
 mark {
     background: color-mix(in srgb, var(--secondary-color) 70%, #fff);
     padding: 0 .15rem;
@@ -466,9 +591,9 @@ footer a {
 }
 
 /* Responsividade */
-@media (max-width: 900px){
+@media (max-width: 1040px){
     .banner{ grid-template-columns: 1fr; }
     .post{ grid-template-columns: 1fr; }
     .about{ grid-template-columns: 1fr; }
-    .searchbar{ width: min(480px, 70vw); }
+    /* .searchbar{ width: min(480px, 70vw); } */
 }
